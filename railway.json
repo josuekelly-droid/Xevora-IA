@@ -1,0 +1,14 @@
+{
+    "build": {
+        "builder": "NIXPACKS",
+        "buildCommand": "composer install --no-dev --ignore-platform-reqs && npm install && npm run build && php artisan optimize",
+        "nixpacks": {
+            "config": {
+                "phpVersion": "8.4"
+            }
+        }
+    },
+    "deploy": {
+        "startCommand": "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+    }
+}
