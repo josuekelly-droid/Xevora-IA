@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('conversations', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title', 500);
+            $table->string('model', 50)->default('gpt-4');
+            $table->string('type', 50)->default('chat');
+            $table->string('status', 20)->default('active');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('conversations');
+    }
+};
